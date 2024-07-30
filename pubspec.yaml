@@ -1,0 +1,17 @@
+name: bookshelf_app
+description: A simple bookshelf app to track reading notes.
+
+environment:
+  sdk: '>=3.4.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/book_image.png
