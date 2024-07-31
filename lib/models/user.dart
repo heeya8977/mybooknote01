@@ -108,83 +108,30 @@ class User {
     return 'User(id: $id, name: $name, email: $email, yearlyReadingGoal: $yearlyReadingGoal)';
   }
 
+
   /// User 객체의 동등성을 비교하는 메서드
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is User &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name &&
+          email == other.email &&
+          profileImageUrl == other.profileImageUrl &&
+          yearlyReadingGoal == other.yearlyReadingGoal &&
+          preferredGenres == other.preferredGenres &&
+          readBooks == other.readBooks &&
+          currentlyReadingBooks == other.currentlyReadingBooks;
 
-    return other is User &&
-        other.id == id &&
-        other.name == name &&
-        other.email == email &&
-        other.profileImageUrl == profileImageUrl &&
-        other.yearlyReadingGoal == yearlyReadingGoal &&
-        listEquals(other.preferredGenres, preferredGenres) &&
-        listEquals(other.readBooks, readBooks) &&
-        listEquals(other.currentlyReadingBooks, currentlyReadingBooks);
-  }
-
-  /// User 객체의 해시코드를 생성하는 메서드
   @override
-  int get hashCode {
-    return hashValues(
-      id,
-      name,
-      email,
-      profileImageUrl,
-      yearlyReadingGoal,
-      Object.hashAll(preferredGenres),
-      Object.hashAll(readBooks),
-      Object.hashAll(currentlyReadingBooks),
-    );
-  }
-}
-
-// 예시 코드
-void main() {
-  // 새로운 User 객체 생성
-  var myUser = User(
-    id: '1',
-    name: '홍길동',
-    email: 'hong@example.com',
-    yearlyReadingGoal: 20,
-    preferredGenres: ['소설', '역사', '과학'],
-  );
-
-  print('새로 생성된 사용자: $myUser');
-
-  // JSON 데이터로부터 User 객체 생성
-  var jsonData = {
-    'id': '2',
-    'name': '김철수',
-    'email': 'kim@example.com',
-    'yearlyReadingGoal': 30,
-    'preferredGenres': ['판타지', '미스터리'],
-    'readBooks': [
-      {
-        'id': '1',
-        'title': '해리 포터',
-        'author': 'J.K. 롤링',
-        'genre': '판타지',
-      }
-    ],
-  };
-  var userFromJson = User.fromJson(jsonData);
-
-  print('JSON에서 생성된 사용자: $userFromJson');
-
-  // User 객체 수정
-  var updatedUser = myUser.copyWith(
-    yearlyReadingGoal: 25,
-    profileImageUrl: 'https://example.com/profile.jpg',
-  );
-
-  print('수정된 사용자: $updatedUser');
-
-  // User 객체를 JSON으로 변환
-  var userJson = updatedUser.toJson();
-  print('JSON으로 변환된 사용자: $userJson');
-
-  // 두 User 객체 비교
-  print('원본 사용자와 수정된 사용자가 같은가? ${myUser == updatedUser}');
+  int get hashCode =>
+      id.hashCode ^
+      name.hashCode ^
+      email.hashCode ^
+      profileImageUrl.hashCode ^
+      yearlyReadingGoal.hashCode ^
+      preferredGenres.hashCode ^
+      readBooks.hashCode ^
+      currentlyReadingBooks.hashCode;
 }

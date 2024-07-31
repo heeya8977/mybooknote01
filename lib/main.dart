@@ -1,18 +1,38 @@
 // main.dart
 
+import 'package:bookshelf_app/screens/book_rating_screen.dart';
+import 'package:bookshelf_app/screens/genre_selection_screen.dart';
+import 'package:bookshelf_app/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
-import 'screens/welcome_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'services/book_service.dart';
 import 'services/user_service.dart';
 
 /// 앱의 진입점
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 /// 앱의 루트 위젯
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+
+  // GoRouter 설정
+  final GoRouter _router = GoRouter(
+    initialLocation: '/',
+    routes: [
+      // 홈 화면 라우트
+      GoRoute(
+        path: '/',
+        builder: (context, state) => BookRatingScreen(selectedGenres: [], targetBooks: 10),
+      ),
+      // 두 번째 화면 라우트
+      GoRoute(
+        path: '/second',
+        builder: (context, state) => GenreSelectionScreen(targetBooks: 10),
+      ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +59,7 @@ class MyApp extends StatelessWidget {
         // 버튼 테마 설정
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
-            onPrimary: Colors.white,
+            foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -58,7 +77,9 @@ class MyApp extends StatelessWidget {
       // 디버그 배너 제거
       debugShowCheckedModeBanner: false,
       // 앱의 시작 화면 설정
-      home: const WelcomeScreen(),
+      home: MaterialApp.router(
+        routerConfig: _router,
+      ),
     );
   }
 }

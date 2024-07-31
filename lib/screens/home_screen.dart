@@ -1,48 +1,5 @@
+import 'package:bookshelf_app/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
-
-// BottomNavigation 위젯 정의
-class BottomNavigation extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onTap;
-
-  // 생성자: 현재 선택된 인덱스와 탭 선택 시 호출될 함수를 받습니다.
-  const BottomNavigation({
-    Key? key,
-    required this.currentIndex,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: currentIndex,
-      onTap: onTap,
-      type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: '홈',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.library_books),
-          label: '나의 서재',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.explore),
-          label: 'Discover',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.emoji_events),
-          label: '챌린지',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: '책 찾기',
-        ),
-      ],
-    );
-  }
-}
 
 // HomeScreen 위젯 정의
 class HomeScreen extends StatefulWidget {
@@ -113,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // 여기에 독서 시작 로직 추가
               print('독서 시작!');
             },
-            child: const Text('독서 시작'),
+            child: const Text('독서 시작', style: TextStyle(fontSize: 20, color: Colors.blue)),
           ),
         ],
       ),

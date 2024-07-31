@@ -2,13 +2,14 @@ name: bookshelf_app
 description: A simple bookshelf app to track reading notes.
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  go_router: ^14.2.1
 
 flutter:
   uses-material-design: true

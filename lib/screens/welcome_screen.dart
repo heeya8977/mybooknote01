@@ -1,21 +1,21 @@
+import 'package:bookshelf_app/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
-import 'bottom_navigation.dart';
 
-class HomeScreen extends StatefulWidget {
+class WelcomeScreen extends StatefulWidget {
   final List<String> selectedGenres;
   final int targetBooks;
 
-  const HomeScreen({
+  const WelcomeScreen({
     Key? key,
-    required this.selectedGenres,
-    required this.targetBooks,
+    this.selectedGenres = const ['소설'],
+    this.targetBooks = 0,
   }) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> {
   int _currentIndex = 0;
 
   // 각 탭에 해당하는 화면 위젯들

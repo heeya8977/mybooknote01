@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../models/book.dart';
 import '../services/book_service.dart';
 import 'home_screen.dart';
@@ -33,7 +34,7 @@ class _BookRatingScreenState extends State<BookRatingScreen> {
   Future<void> _loadRecommendedBooks() async {
     try {
       // BookService를 통해 추천 도서 목록을 가져옵니다.
-      recommendedBooks = await _bookService.getRecommendedBooks(widget.selectedGenres);
+      recommendedBooks = await _bookService.getRecommendedBooks();
       setState(() {
         _isLoading = false;
       });
@@ -112,16 +113,7 @@ class _BookRatingScreenState extends State<BookRatingScreen> {
         child: const Icon(Icons.check),
         onPressed: () {
           // 홈 화면으로 이동
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                selectedGenres: widget.selectedGenres,
-                targetBooks: widget.targetBooks,
-                ratedBooks: recommendedBooks,
-              ),
-            ),
-                (Route<dynamic> route) => false,
-          );
+          GoRouter.of(context).go('/second');
         },
       ),
     );

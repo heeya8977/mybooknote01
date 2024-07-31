@@ -133,87 +133,36 @@ class Book {
     return 'Book(id: $id, title: $title, author: $author, genre: $genre)';
   }
 
-  /// Book 객체의 동등성을 비교하는 메서드
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Book &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          title == other.title &&
+          author == other.author &&
+          genre == other.genre &&
+          coverUrl == other.coverUrl &&
+          rating == other.rating &&
+          isRead == other.isRead &&
+          dateCompleted == other.dateCompleted &&
+          isbn == other.isbn &&
+          publisher == other.publisher &&
+          publishDate == other.publishDate &&
+          description == other.description;
 
-    return other is Book &&
-        other.id == id &&
-        other.title == title &&
-        other.author == author &&
-        other.genre == genre &&
-        other.coverUrl == coverUrl &&
-        other.rating == rating &&
-        other.isRead == isRead &&
-        other.dateCompleted == dateCompleted &&
-        other.isbn == isbn &&
-        other.publisher == publisher &&
-        other.publishDate == publishDate &&
-        other.description == description;
-  }
-
-  /// Book 객체의 해시코드를 생성하는 메서드
   @override
-  int get hashCode {
-    return hashValues(
-      id,
-      title,
-      author,
-      genre,
-      coverUrl,
-      rating,
-      isRead,
-      dateCompleted,
-      isbn,
-      publisher,
-      publishDate,
-      description,
-    );
-  }
-}
-
-// 예시 코드
-void main() {
-  // 새로운 Book 객체 생성
-  var myBook = Book(
-    id: '1',
-    title: '1984',
-    author: 'George Orwell',
-    genre: '소설',
-    isbn: '9780451524935',
-    publisher: 'Signet Classic',
-    publishDate: DateTime(1961, 1, 1),
-    description: '디스토피아 소설의 고전',
-  );
-
-  print('새로 생성된 책: $myBook');
-
-  // JSON 데이터로부터 Book 객체 생성
-  var jsonData = {
-    'id': '2',
-    'title': '햄릿',
-    'author': '윌리엄 셰익스피어',
-    'genre': '희곡',
-    'publishDate': '1603-01-01',
-  };
-  var bookFromJson = Book.fromJson(jsonData);
-
-  print('JSON에서 생성된 책: $bookFromJson');
-
-  // Book 객체 수정
-  var updatedBook = myBook.copyWith(
-    rating: 5,
-    isRead: true,
-    dateCompleted: DateTime.now(),
-  );
-
-  print('수정된 책: $updatedBook');
-
-  // Book 객체를 JSON으로 변환
-  var bookJson = updatedBook.toJson();
-  print('JSON으로 변환된 책: $bookJson');
-
-  // 두 Book 객체 비교
-  print('원본 책과 수정된 책이 같은가? ${myBook == updatedBook}');
+  int get hashCode =>
+      id.hashCode ^
+      title.hashCode ^
+      author.hashCode ^
+      genre.hashCode ^
+      coverUrl.hashCode ^
+      rating.hashCode ^
+      isRead.hashCode ^
+      dateCompleted.hashCode ^
+      isbn.hashCode ^
+      publisher.hashCode ^
+      publishDate.hashCode ^
+      description.hashCode;
 }
